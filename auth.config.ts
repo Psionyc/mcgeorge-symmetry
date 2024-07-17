@@ -6,6 +6,7 @@ export const authConfig = {
     signIn: '/login',
     newUser: '/signup'
   },
+  trustHost: true,
   callbacks: {
     async authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user

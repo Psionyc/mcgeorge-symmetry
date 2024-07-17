@@ -3,9 +3,11 @@
 import { signIn } from '@/auth'
 import { ResultCode, getStringFromBuffer } from '@/lib/utils'
 import { z } from 'zod'
-import { kv } from '@vercel/kv'
 import { getUser } from '../login/actions'
 import { AuthError } from 'next-auth'
+import { db } from '@/lib/db/db'
+import { UserDB, UserSchema } from '@/lib/db/schemas'
+import { create } from 'cirql'
 
 export async function createUser(
   email: string,
@@ -21,13 +23,15 @@ export async function createUser(
     }
   } else {
     const user = {
-      id: crypto.randomUUID(),
       email,
       password: hashedPassword,
       salt
     }
 
-    await kv.hmset(`user:${email}`, user)
+    await db.execute({
+      schema: UserSchema,
+      query: create(UserDB).content(user)
+    })
 
     return {
       type: 'success',

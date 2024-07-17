@@ -6,6 +6,7 @@ import { getSharedChat } from '@/app/actions'
 import { ChatList } from '@/components/chat-list'
 import { FooterText } from '@/components/footer'
 import { AI, UIState, getUIStateFromAIState } from '@/lib/chat/actions'
+import { Chat } from '@/lib/types'
 
 export const runtime = 'edge'
 export const preferredRegion = 'home'
@@ -33,7 +34,7 @@ export default async function SharePage({ params }: SharePageProps) {
     notFound()
   }
 
-  const uiState: UIState = getUIStateFromAIState(chat)
+  const uiState: UIState = getUIStateFromAIState(chat as any as Chat)
 
   return (
     <>

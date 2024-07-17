@@ -6,11 +6,11 @@ import { Session } from '@/lib/types'
 import { getMissingKeys } from '@/app/actions'
 
 export const metadata = {
-  title: 'Next.js AI Chatbot'
+  title: 'Symmetry Bot'
 }
 
 export default async function IndexPage() {
-  const id = nanoid()
+  const id = "chat:" + nanoid()
   const session = (await auth()) as Session
   const missingKeys = await getMissingKeys()
 

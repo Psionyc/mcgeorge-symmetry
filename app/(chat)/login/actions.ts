@@ -1,14 +1,23 @@
 'use server'
 
 import { signIn } from '@/auth'
-import { User } from '@/lib/types'
+
 import { AuthError } from 'next-auth'
 import { z } from 'zod'
-import { kv } from '@vercel/kv'
 import { ResultCode } from '@/lib/utils'
+import { db } from '@/lib/db/db'
+import { select } from 'cirql'
+import { User, UserDB } from '@/lib/db/schemas'
+
 
 export async function getUser(email: string) {
-  const user = await kv.hgetall<User>(`user:${email}`)
+  const user: User = await db.execute({
+    schema: z.any(),
+    query: select().from(UserDB).where({
+      email: email
+    }).one()
+  })
+
   return user
 }
 
