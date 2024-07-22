@@ -34,7 +34,7 @@ function HomePage() {
 
                     <div className="flex flex-row gap-4">
                         <Link href="/chat"><Button>Get Started</Button></Link>
-                        <Link href="/chat"><Button variant={"secondary"} >Learn More</Button></Link>
+                        <Link href="/about"><Button variant={"secondary"} >Learn More</Button></Link>
                     </div>
 
                 </div>
