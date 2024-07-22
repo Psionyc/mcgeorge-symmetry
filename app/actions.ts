@@ -162,8 +162,7 @@ export async function saveChat(chat: Chat) {
 
     else await db.execute({
       schema: ChatSchema,
-      query: updateRecord(`${chat.id}`).content(chat)
-
+      query: updateRecord(`${chat.id}`).set("messages", chat.messages)
     })
 
     // const pipeline = kv.pipeline()
