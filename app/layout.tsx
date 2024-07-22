@@ -19,10 +19,10 @@ export const metadata = {
     ? new URL(`https://${process.env.VERCEL_URL}`)
     : undefined,
   title: {
-    default: 'Symmetry Fashion AI Chatbot',
-    template: `%s - Symmetry Fashion AI Chatbot`
+    default: 'Data2Analysis: Next-Gen Education AI',
+    template: `%s - Data2Analysis: Next-Gen Education AI`
   },
-  description: 'AI Powered Fashion ChatBot',
+  description: 'Data2Analysis: Next-Gen Education AI',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',

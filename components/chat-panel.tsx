@@ -11,6 +11,7 @@ import { useAIState, useActions, useUIState } from 'ai/rsc'
 import type { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { UserMessage } from './stocks/message'
+import type { Chat, ServerActionResult } from '@/lib/types'
 
 export interface ChatPanelProps {
   id?: string
@@ -36,16 +37,15 @@ export function ChatPanel({
 
   const exampleMessages = [
     {
-      heading: 'What are the',
-      subheading: 'trending fabric designs today?',
-      message: `What are the trending fabric designs today?`
+      heading: 'Tell me about',
+      subheading: 'the history of PCs',
+      message: 'Tell me about the history of PCs'
     },
     {
-      heading: 'What is a',
-      subheading: 'corset?',
-      message: 'What is a corset?'
-    },
-
+      heading: 'What are the steps to',
+      subheading: 'Learning Calculus?',
+      message: 'What are the steps to learning Calculus?'
+    }
   ]
 
   return (
@@ -59,6 +59,7 @@ export function ChatPanel({
         <div className="mb-4 grid grid-cols-2 gap-2 px-4 sm:px-0">
           {messages.length === 0 &&
             exampleMessages.map((example, index) => (
+              // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
               <div
                 key={example.heading}
                 className={`cursor-pointer rounded-lg border bg-white p-4 hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900 ${index > 1 && 'hidden md:block'
@@ -106,7 +107,7 @@ export function ChatPanel({
                     open={shareDialogOpen}
                     onOpenChange={setShareDialogOpen}
                     onCopy={() => setShareDialogOpen(false)}
-                    shareChat={shareChat as any}
+                    shareChat={shareChat as (id: string) => ServerActionResult<Chat>}
                     chat={{
                       id,
                       title,
