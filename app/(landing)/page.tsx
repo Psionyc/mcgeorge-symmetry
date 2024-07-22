@@ -138,5 +138,21 @@ function HomePageDesktop() {
 
     </>);
 }
+function HomePage() {
+	return (
+		<div>
+			<div className="md:hidden">
+				<HomePageMobile />
+			</div>
+			<div className="hidden md:block">
+				<HomePageDesktop />
+			</div>
+		</div>
+	);
+}
+
 
 export default HomePage;
+
+
+
